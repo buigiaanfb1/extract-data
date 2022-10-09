@@ -1,12 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import classes from './styles.module.scss';
 import { RouteMapping } from 'constant';
 import Header from 'components/Header';
+import { useLoginMutation } from 'app/services/auth';
+import { setCredentials } from 'features/auth/authSlice';
+import { useDispatch } from 'react-redux';
 
 interface IFormInputs {
   username: string;
@@ -49,7 +52,28 @@ const Authenticate: React.FC<AuthenticateProps> = ({
       formType === RouteMapping.LOGIN ? schemaLogin : schemaSignUp
     ),
   });
-  const onSubmit = handleSubmit((data) => console.log(data));
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
+
+  const onSubmit = handleSubmit(async (data) => {
+    if (formType === RouteMapping.LOGIN) {
+      try {
+        const response = await login(data).unwrap();
+        if (response && response.data.accessToken) {
+          localStorage.setItem(
+            'access_token',
+            JSON.stringify(response.data.accessToken)
+          );
+          dispatch(setCredentials(response));
+          navigate('/dashboard');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  });
 
   return (
     <>
