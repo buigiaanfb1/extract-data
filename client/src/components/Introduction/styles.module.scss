@@ -1,0 +1,61 @@
+@import '../../assets/mixins';
+
+.background {
+  background-image: url("../../images/bg.jpeg");
+  background-color: #cccccc;
+  height: 960px;
+  width: 960px;
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size:contain;
+  position: absolute;
+  top: 0%;
+  left: 45%;
+  z-index: -1;
+
+}
+
+.introduction {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  h1 {
+    font-size: 48px;
+    font-weight: 800;
+  } 
+  p {
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  button{
+    background:#4ce2bf;
+    padding: 8px 20px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;   
+      margin: 0 0.5rem;  
+      &:hover {
+        background:#11a683;
+      }
+    &:first-of-type {
+      background:black;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;  
+      
+      &:hover {
+        background:rgb(66, 66, 66);
+      }
+   }
+  }
+}

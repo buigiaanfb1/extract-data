@@ -1,0 +1,80 @@
+@import '../../assets/mixins';
+
+.background {
+  background-image: url("../../images/background.jpeg");
+  background-color: #cccccc;
+  min-height: 100vh;
+  width: 35%;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 20%;
+  left: 0;
+
+}
+
+.wrapperForm {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 48px rgba(26, 33, 52, 0.11);
+    max-width: 460px;
+    min-width: 320px;
+    padding: 32px;
+    width: 100%;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    .headerForm {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      h2 {
+        font-weight: 700;
+        font-size: 24px;
+        margin: 0;
+      }
+
+      a {
+        font-size: 14px;
+      }
+    }
+
+    .bodyForm {
+      .form {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          border-radius: 4px;
+          border: 1px solid #E7E9F5;
+          padding: 8px 12px;
+          font-size: 16px;
+          outline: none;
+          width: 100%;
+          margin-bottom: 0.5rem;
+        }
+        input[type="submit"] {
+          margin-top: 0.5rem;
+          background-color: #11a683;
+          font-weight: 700;
+          color: white;
+
+        }
+
+        .errorFormField {
+          font-size: 12px;
+          height: 16px;
+          color: red;
+          padding: 0rem 12px;
+        }
+      }
+    }
+    .footerForm {
+      font-size: 12px;
+      color: #6D758D;
+    }
+}
