@@ -3,11 +3,12 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { toast } from 'react-toastify';
 
 import classes from './styles.module.scss';
 import { RouteMapping } from 'constant';
 import Header from 'components/Header';
-import { useLoginMutation } from 'app/services/auth';
+import { useLoginMutation, useSignupMutation } from 'app/services/auth';
 import { setCredentials } from 'features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
@@ -55,7 +56,8 @@ const Authenticate: React.FC<AuthenticateProps> = ({
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
+  const [signup, { isLoading: isSignupLoading }] = useSignupMutation();
 
   const onSubmit = handleSubmit(async (data) => {
     if (formType === RouteMapping.LOGIN) {
@@ -71,6 +73,17 @@ const Authenticate: React.FC<AuthenticateProps> = ({
         }
       } catch (err) {
         console.log(err);
+      }
+    } else {
+      try {
+        const response = await signup(data).unwrap();
+        console.log(response.statusCode);
+        if (response.statusCode === 200) {
+          toast('Created successfully, please login!');
+          navigate('/dashboard');
+        }
+      } catch (err: any) {
+        toast(err.data.message);
       }
     }
   });

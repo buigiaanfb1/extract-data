@@ -21,6 +21,12 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface SignupRequest {
+  username: string;
+  email?: string;
+  password: string;
+}
+
 export interface AuthResponse {
   data: any;
   statusCode: Number;
@@ -53,10 +59,22 @@ export const api = createApi({
         body: credentials,
       }),
     }),
+    signup: builder.mutation<UserResponse, SignupRequest>({
+      query: (userInfo) => ({
+        url: 'auth/signup',
+        method: 'POST',
+        body: userInfo,
+      }),
+    }),
     protected: builder.mutation<{ message: string }, void>({
       query: () => 'protected',
     }),
   }),
 });
 
-export const { useAuthMutation, useLoginMutation, useProtectedMutation } = api;
+export const {
+  useSignupMutation,
+  useAuthMutation,
+  useLoginMutation,
+  useProtectedMutation,
+} = api;

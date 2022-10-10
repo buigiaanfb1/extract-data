@@ -11,14 +11,18 @@ import classes from './styles.module.scss';
 import Authenticate from 'components/Authenticate';
 import { getToken } from 'utils/getSetToken';
 import Dashboard from 'components/Dashboard';
-import { RequireAuth } from 'utils/RequireAuth';
+import { RequireAuth } from 'layouts/RequireAuth/RequireAuth';
 import { useAuth } from 'hooks/useAuth';
+import History from 'components/History';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   useAuth();
 
   return (
     <div className={classes.page}>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Introduction />} />
         <Route
@@ -43,6 +47,7 @@ function App() {
         />
         <Route element={<RequireAuth />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/history" element={<History />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
