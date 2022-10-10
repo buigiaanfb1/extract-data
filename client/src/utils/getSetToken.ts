@@ -7,5 +7,9 @@ export function getToken() {
 }
 
 export function setToken(userToken: string) {
-  sessionStorage.setItem('token', JSON.stringify(userToken));
+  localStorage.setItem('access_token', JSON.stringify(userToken));
+}
+
+export function removeToken(keyName: string) {
+  localStorage.removeItem('access_token');
 }

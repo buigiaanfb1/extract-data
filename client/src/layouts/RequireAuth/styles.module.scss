@@ -1,0 +1,63 @@
+@import '../../assets/mixins';
+
+.wrapper {
+  display: flex;
+  .wrapperMenu {
+    background-color: #323439;
+    height: 100vh;
+    width: 300px;
+    padding: 50px 0 0 50px;
+    position: relative;
+    h2 {
+      font-weight: 800;
+      font-size: 24px;
+      margin: 0;
+      color: rgba(256, 256, 256, 0.2);
+      cursor: pointer;
+    }
+    .menu_list {
+      padding: 4rem 0 0 0;
+      ul {
+        padding: 0;
+      }
+      li {
+        list-style: none;
+        text-decoration: none;
+        padding: 0.25rem 0;
+        a {
+          text-decoration: none;
+          font-weight: 300;
+          font-size: 24px;
+          color: rgba(256, 256, 256, 0.5);
+
+        }
+      }
+    }
+    .footerMenu {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      font-size: 22px;
+
+      padding: 50px 0 0 50px;
+      color: rgba(256, 256, 256, 0.5);
+
+      .logout {
+        p {
+          margin: 0;
+          &:hover {
+            color: rgba(256, 256, 256, 1);
+            cursor: pointer;
+
+          }
+          &:last-of-type {
+            font-size: 12px;
+            color: rgba(256, 256, 256, 0.5);
+
+          }
+        }
+      }
+
+    }
+  }
+}
