@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require('./app/models');
-const Role = db.role;
 
 db.sequelize
   .sync()
@@ -29,13 +28,6 @@ db.sequelize
     console.log('Failed to sync db: ' + err.message);
   });
 
-function initial() {
-  Role.create({
-    id: 1,
-    name: 'user',
-  });
-}
-
 // simple route
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to extract data application.' });
@@ -43,6 +35,7 @@ app.get('/', (req, res) => {
 
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/search.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
