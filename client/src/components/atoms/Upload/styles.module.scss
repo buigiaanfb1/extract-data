@@ -1,0 +1,53 @@
+@import '../../../assets/mixins';
+
+.imageUploadWrapper {
+  display: flex;
+  align-items: center;
+  justify-content:space-evenly;
+  background-color: #fff;
+  width: 140px;
+  height: 172px;
+  box-shadow: 0 1px 4px rgba(1, 1, 1, 0.15);
+
+  label {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .imageUploadFlex {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content:space-between;
+  }
+  .imageUpload {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  p {
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+  h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+
+  }
+  .buttonUpload {
+    height: 25%;
+    border-top: 1px solid #f6f6f5;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

@@ -1,5 +1,4 @@
 import { useAuthMutation } from 'app/services/auth';
-import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from 'utils/getSetToken';
@@ -13,22 +12,19 @@ export const useAuth = () => {
   const navigate = useNavigate();
 
   const getAuth = async () => {
-    const response = await auth().unwrap();
-    if (response && response.data.accessToken) {
-      localStorage.setItem(
-        'access_token',
-        JSON.stringify(response.data.accessToken)
-      );
-      dispatch(setCredentials(response));
-      navigate('/dashboard');
+    if (token && !user?.accessToken) {
+      console.log(!user?.accessToken);
+      const response = await auth().unwrap();
+      if (response && response.data.accessToken) {
+        localStorage.setItem(
+          'access_token',
+          JSON.stringify(response.data.accessToken)
+        );
+        dispatch(setCredentials(response));
+        navigate('/dashboard');
+      }
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      getAuth();
-    }
-  }, []);
-
-  return useMemo(() => ({ user }), [user]);
+  return getAuth;
 };

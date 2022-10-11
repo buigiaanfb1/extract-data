@@ -28,22 +28,15 @@ exports.getAuth = (req, res) => {
             expiresIn: 86400, // 24 hours
           });
 
-          var authorities = [];
-          user.getRoles().then((roles) => {
-            for (let i = 0; i < roles.length; i++) {
-              authorities.push('ROLE_' + roles[i].name.toUpperCase());
-            }
-            res.status(200).send({
-              statusCode: 200,
-              data: {
-                id: user.id,
-                username: user.username,
-                email: user.email,
-                roles: authorities,
-                accessToken: token,
-              },
-              errors: null,
-            });
+          res.status(200).send({
+            statusCode: 200,
+            data: {
+              id: user.id,
+              username: user.username,
+              email: user.email,
+              accessToken: token,
+            },
+            errors: null,
           });
         })
         .catch((err) => {
@@ -63,10 +56,8 @@ exports.signup = (req, res) => {
     .then((user) => {
       res.status(200).send({
         statusCode: 200,
-        data: {
-          message: 'Created',
-        },
-        errors: null,
+        data: null,
+        errors: 'Successfully created account',
       });
     })
     .catch((err) => {
@@ -90,7 +81,11 @@ exports.signin = (req, res) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(404).send({ message: 'User Not found.' });
+        return res.status(404).send({
+          statusCode: 404,
+          data: null,
+          errors: 'Wrong username or password',
+        });
       }
 
       var passwordIsValid = bcrypt.compareSync(password, user.password);
@@ -98,7 +93,7 @@ exports.signin = (req, res) => {
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
-          message: 'Invalid Password!',
+          message: 'Username or password is wrong, please double-check again!',
         });
       }
 

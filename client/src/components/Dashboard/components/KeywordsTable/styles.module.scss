@@ -1,0 +1,24 @@
+@import '../../../../assets/mixins';
+
+.wrapper {
+  width: 100%;
+
+  nav {
+    justify-content: center;
+  }
+
+  table {
+    display: block;
+    max-height: 70vh;
+    height: 50vh;
+    overflow: auto;
+    thead {
+      position: sticky; 
+      background-color: #f6f6f6;
+      top: 0;
+    }
+    tbody {
+      overflow: auto;
+    }
+  }
+}
