@@ -28,11 +28,6 @@ db.sequelize
     console.log('Failed to sync db: ' + err.message);
   });
 
-// simple route
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to extract data application.' });
-});
-
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/search.routes')(app);
