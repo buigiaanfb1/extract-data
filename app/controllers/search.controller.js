@@ -1,5 +1,6 @@
 const db = require('../models');
 const puppeteer = require('puppeteer');
+const { Op } = require('sequelize');
 
 const Keyword = db.keyword;
 
@@ -50,6 +51,7 @@ exports.findAllKeywordsById = async (req, res) => {
     where: {
       userId: req.userId,
     },
+    order: [['id', 'DESC']],
   })
     .then((result) => {
       return res.status(200).send({
@@ -68,11 +70,13 @@ exports.findAllKeywordsById = async (req, res) => {
 };
 
 exports.findKeywordInfo = async (req, res) => {
-  const { keyword } = req.body;
+  const { keyword } = req.query;
   Keyword.findAll({
     where: {
       userId: req.userId,
-      keyword,
+      keyword: {
+        [Op.like]: '%' + keyword + '%',
+      },
     },
   })
     .then((result) => {
