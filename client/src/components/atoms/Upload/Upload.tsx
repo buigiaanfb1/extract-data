@@ -1,9 +1,20 @@
+import {
+  useCrawlMutation,
+  useGetAllKeywordsMutation,
+} from 'app/services/keyword';
+import { setLoading } from 'features/keyword/keywordSlice';
+import { useKeywords } from 'hooks/useKeyword';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import classes from './styles.module.scss';
+import { toast } from 'react-toastify';
 
 const Upload: React.FC = () => {
-  const [file, setFile] = useState<any>(null);
-  const [array, setArray] = useState([]);
+  const dispatch = useDispatch();
+  const [crawl, { isLoading: crawlIsLoading }] = useCrawlMutation();
+  const getAllKeywords = useKeywords();
 
+  const [file, setFile] = useState<any>(null);
   const fileReader = new FileReader();
 
   const handleOnChange = (e: any) => {
@@ -12,7 +23,7 @@ const Upload: React.FC = () => {
     setFile(e.target.files[0]);
   };
 
-  const csvFileToArray = (string: string) => {
+  const csvFileToArray = async (string: string) => {
     const csvHeader = string.slice(0, string.indexOf('\n')).split(',');
     const csvRows = string.slice(string.indexOf('\n') + 1).split('\n');
 
@@ -25,7 +36,16 @@ const Upload: React.FC = () => {
       return obj;
     });
 
-    setArray(array);
+    let keywords: Array<string> = [];
+
+    array.map((item: any) =>
+      Object.values(item).map((val: any) => keywords.push(val.split('\r')[0]))
+    );
+    toast('Uploading...');
+    await crawl({ keywords }).unwrap();
+    dispatch(setLoading());
+    getAllKeywords();
+    toast('Done!');
   };
 
   const handleOnSubmit = (e: any) => {
@@ -35,52 +55,41 @@ const Upload: React.FC = () => {
       fileReader.onload = function (event: any) {
         const text = event.target.result;
         csvFileToArray(text);
-        console.log(text);
       };
 
       fileReader.readAsText(file);
     }
   };
 
-  const headerKeys = Object.keys(Object.assign({}, ...array));
-
   return (
     <div>
       <form>
-        <input
-          type={'file'}
-          id={'csvFileInput'}
-          accept={'.csv'}
-          onChange={handleOnChange}
-        />
-
-        <button
-          onClick={(e) => {
-            handleOnSubmit(e);
-          }}
-        >
-          IMPORT CSV
-        </button>
+        <div className={classes.imageUploadWrapper}>
+          <div className={classes.imageUploadFlex}>
+            <label htmlFor="csvFileInput">
+              <div className={classes.imageUpload}>
+                <i
+                  className="attach-doc fa fa-paperclip fa-2x"
+                  aria-hidden="true"
+                ></i>
+                <p>{file ? file.name : '.csv file'}</p>
+              </div>
+            </label>
+            {file && (
+              <div className={classes.buttonUpload} onClick={handleOnSubmit}>
+                <h5>Upload</h5>
+              </div>
+            )}
+          </div>
+          <input
+            type={'file'}
+            id={'csvFileInput'}
+            style={{ display: 'none' }}
+            accept={'.csv'}
+            onChange={handleOnChange}
+          />
+        </div>
       </form>
-      <table>
-        <thead>
-          <tr key={'header'}>
-            {headerKeys.map((key) => (
-              <th>{key}</th>
-            ))}
-          </tr>
-        </thead>
-
-        <tbody>
-          {array.map((item: any) => (
-            <tr key={item.id}>
-              {Object.values(item).map((val: any) => (
-                <td>{val}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 };

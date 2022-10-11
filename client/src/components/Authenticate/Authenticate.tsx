@@ -71,8 +71,9 @@ const Authenticate: React.FC<AuthenticateProps> = ({
           dispatch(setCredentials(response));
           navigate('/dashboard');
         }
-      } catch (err) {
+      } catch (err: any) {
         console.log(err);
+        toast(err.data.errors);
       }
     } else {
       try {

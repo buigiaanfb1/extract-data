@@ -1,4 +1,6 @@
+import { selectCurrentUser } from 'features/auth/authSlice';
 import { useAuth } from 'hooks/useAuth';
+import { useSelector } from 'react-redux';
 import {
   NavLink,
   Navigate,
@@ -10,10 +12,10 @@ import { removeToken } from 'utils/getSetToken';
 import classes from './styles.module.scss';
 
 export function RequireAuth() {
-  let auth = useAuth();
+  let auth = useSelector(selectCurrentUser);
   let location = useLocation();
   let navigate = useNavigate();
-  if (auth.user?.username === null) {
+  if (auth && auth.username === null) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience
@@ -61,11 +63,11 @@ export function RequireAuth() {
         <div className={classes.footerMenu}>
           <div className={classes.logout}>
             <p onClick={() => handleUserLogout()}>Sign Out</p>
-            <p>{auth.user?.email}</p>
+            <p>{auth && auth.email}</p>
           </div>
         </div>
       </aside>
-      <div>
+      <div className={classes.outlet}>
         <Outlet />
       </div>
     </div>

@@ -14,7 +14,6 @@ const slice = createSlice({
     data: {
       username: null,
       email: null,
-      roles: [],
       id: null,
       accessToken: null,
     },
