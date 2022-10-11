@@ -21,7 +21,7 @@ const db = require('./app/models');
 db.sequelize
   .sync()
   .then(() => {
-    console.log('Drop and re-sync db.');
+    console.log('Connected Database');
     // initial();
   })
   .catch((err) => {
@@ -36,6 +36,16 @@ app.get('/', (req, res) => {
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/search.routes')(app);
+
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
