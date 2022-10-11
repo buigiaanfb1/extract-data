@@ -7,7 +7,9 @@ const Keyword = db.keyword;
 exports.searchByEachKeyWords = async (req, res) => {
   const { keywords } = req.body;
 
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await browser.newPage();
 
   const data = {
