@@ -22,7 +22,7 @@ export interface CrawlResponse {
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:8080/api/',
+    baseUrl: '/api',
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = getToken();
