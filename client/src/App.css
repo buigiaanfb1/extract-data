@@ -2,6 +2,30 @@
   text-align: center;
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color:rgba(0,0,0,0.5);
+
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 5rem;
+  padding: 1rem;
+  left: 50%;
+  transform: translate(-50%, -0%);
+  z-index: 10000;
+  width: 70vw;
+  height: 60vh;
+  background-color: #fff;
+  color: black;
+  overflow: scroll;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
