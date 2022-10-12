@@ -1,6 +1,7 @@
-import classes from './styles.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RouteMapping } from 'constant';
+
+import classes from './styles.module.scss';
 
 const Header = () => {
   let navigate = useNavigate();

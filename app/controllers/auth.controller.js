@@ -1,9 +1,9 @@
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
 const db = require('../models');
 const config = require('../../config/auth.config.js');
 const User = db.user;
-
-var jwt = require('jsonwebtoken');
-var bcrypt = require('bcryptjs');
 
 exports.getAuth = (req, res) => {
   let token = req.headers['authorization'];
@@ -24,7 +24,7 @@ exports.getAuth = (req, res) => {
         },
       })
         .then((user) => {
-          var token = jwt.sign({ id: user.id }, config.secret, {
+          let token = jwt.sign({ id: user.id }, config.secret, {
             expiresIn: 86400, // 24 hours
           });
 
@@ -53,14 +53,16 @@ exports.signup = (req, res) => {
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
   })
-    .then((user) => {
+    .then(() => {
       res.status(200).send({
         statusCode: 200,
-        data: null,
-        errors: 'Successfully created account',
+        data: {
+          message: 'Successfully created account',
+        },
+        errors: null,
       });
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(500).send({
         statusCode: 500,
         data: {
@@ -88,7 +90,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      var passwordIsValid = bcrypt.compareSync(password, user.password);
+      let passwordIsValid = bcrypt.compareSync(password, user.password);
 
       if (!passwordIsValid) {
         return res.status(401).send({
@@ -97,7 +99,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      let token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
 

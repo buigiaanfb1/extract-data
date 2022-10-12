@@ -1,6 +1,7 @@
 import Header from 'components/Header';
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
+
 import { RouteMapping } from '../../constant';
 import classes from './styles.module.scss';
 

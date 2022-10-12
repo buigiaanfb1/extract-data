@@ -26,7 +26,6 @@ db.sequelize
   });
 
 require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
 require('./app/routes/search.routes')(app);
 
 // Serve static assets in production

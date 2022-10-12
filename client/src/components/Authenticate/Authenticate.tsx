@@ -4,13 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
-
-import classes from './styles.module.scss';
 import { RouteMapping } from 'constant';
 import Header from 'components/Header';
 import { useLoginMutation, useSignupMutation } from 'app/services/auth';
 import { setCredentials } from 'features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+
+import classes from './styles.module.scss';
 
 interface IFormInputs {
   username: string;
@@ -56,8 +56,8 @@ const Authenticate: React.FC<AuthenticateProps> = ({
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
-  const [signup, { isLoading: isSignupLoading }] = useSignupMutation();
+  const [login] = useLoginMutation();
+  const [signup] = useSignupMutation();
 
   const onSubmit = handleSubmit(async (data) => {
     if (formType === RouteMapping.LOGIN) {

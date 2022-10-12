@@ -2,12 +2,13 @@ import { useAuthMutation } from 'app/services/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from 'utils/getSetToken';
+
 import { selectCurrentUser, setCredentials } from '../features/auth/authSlice';
 
 export const useAuth = () => {
   const user = useSelector(selectCurrentUser);
   const token = getToken();
-  const [auth, { isLoading }] = useAuthMutation();
+  const [auth] = useAuthMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
