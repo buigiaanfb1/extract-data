@@ -72,13 +72,11 @@ const Authenticate: React.FC<AuthenticateProps> = ({
           navigate('/dashboard');
         }
       } catch (err: any) {
-        console.log(err);
         toast(err.data.errors);
       }
     } else {
       try {
         const response = await signup(data).unwrap();
-        console.log(response.statusCode);
         if (response.statusCode === 200) {
           toast('Created successfully, please login!');
           navigate('/dashboard');

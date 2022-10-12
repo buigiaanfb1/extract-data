@@ -14,7 +14,6 @@ export const useAuth = () => {
 
   const getAuth = async () => {
     if (token && !user?.accessToken) {
-      console.log(!user?.accessToken);
       const response = await auth().unwrap();
       if (response && response.data.accessToken) {
         localStorage.setItem(

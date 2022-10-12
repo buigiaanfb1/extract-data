@@ -32,8 +32,6 @@ export function RequireAuth() {
     color: 'white',
   };
 
-  let activeClassName = 'underline';
-
   return (
     <div className={classes.wrapper}>
       <aside className={classes.wrapperMenu}>
