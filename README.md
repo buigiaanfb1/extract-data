@@ -51,7 +51,7 @@ _______________________________________
  - keyword: **string**
 
  **`Body:`**
- - keyword: **Array[string]**
+ - keywords: **Array[string]**
  - signup: **{ email: string, username: string, password: string }**
  - signin: **{ username: string, password: string }**
 
@@ -63,7 +63,7 @@ _____________________________________________________________________
 | /api/auth/signup      | POST    |               |         | signup
 | /api/auth/signin      | POST    |               |         | signin
 |                       |         |               |         |
-| /api/keywords/crawl   | POST    | authorization |         | keyword
+| /api/keywords/crawl   | POST    | authorization |         | keywords
 | /api/keywords         | GET     | authorization |         |
 | /api/keywords/search  | GET     | authorization | keyword |
 _______________________________________
