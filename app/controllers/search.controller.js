@@ -1,4 +1,5 @@
 const db = require('../models');
+
 const puppeteer = require('puppeteer');
 const { Op } = require('sequelize');
 
