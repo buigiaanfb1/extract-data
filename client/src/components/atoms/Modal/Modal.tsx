@@ -15,7 +15,11 @@ const Modal: React.FC<ModalProps> = ({
   isShowing
     ? ReactDOM.createPortal(
         <React.Fragment>
-          <div className="modal-overlay" onClick={hide} />
+          <div
+            data-testid="modal-overlay"
+            className="modal-overlay"
+            onClick={hide}
+          />
           <div
             className="modal-wrapper"
             aria-modal

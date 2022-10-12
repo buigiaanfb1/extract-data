@@ -1,0 +1,18 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "jsdom",
+  "collectCoverage": true,
+  "collectCoverageFrom": ["src/**/*.{ts,tsx}"],
+  "coverageDirectory": "coverage",
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.ts", "@testing-library/jest-dom", "./jest.setup.ts"],
+  "moduleDirectories": ["node_modules", "<rootDir>/src"],
+  "transform": {
+    "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
+  },
+  "transformIgnorePatterns": [
+    "node_modules/(?!variables/.*)"
+  ],
+  "moduleNameMapper":{
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy" 
+  }
+}
