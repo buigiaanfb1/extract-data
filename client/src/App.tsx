@@ -7,7 +7,7 @@ import Authenticate from 'components/Authenticate';
 import Dashboard from 'components/Dashboard';
 import { RequireAuth } from 'layouts/RequireAuth/RequireAuth';
 import { useAuth } from 'hooks/useAuth';
-import History from 'components/History';
+import Guidelines from 'components/Guidelines';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -49,7 +49,7 @@ function App() {
         />
         <Route element={<RequireAuth />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/guidelines" element={<Guidelines />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
