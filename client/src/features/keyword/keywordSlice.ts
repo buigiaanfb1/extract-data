@@ -2,12 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { Keyword } from '../../app/services/keyword';
-import type { RootState } from '../../app/store';
+import type { Builder, RootState } from '../../app/store';
 
 type KeywordState = {
   data: Array<Keyword>;
   isLoading: boolean;
 };
+
+export const buildKeywordReducerState: Builder<KeywordState> = (
+  overrides = {}
+) => ({
+  data: [],
+  isLoading: false,
+});
 
 const slice = createSlice({
   name: 'keyword',

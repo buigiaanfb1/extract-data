@@ -18,7 +18,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }: SearchProps) => {
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input onChange={handleChange} value={value} />
+        <input onChange={handleChange} value={value} aria-label="input" />
         <button type="submit" onClick={(e) => handleSubmit(e)}>
           Search
         </button>

@@ -18,3 +18,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+export declare type Builder<T> = (overrides?: Partial<T>) => T;

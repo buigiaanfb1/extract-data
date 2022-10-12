@@ -1,20 +1,20 @@
 import { render, screen } from '@testing-library/react';
+import { store } from 'app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { store } from './app/store';
-import App from './App';
+import { RequireAuth } from './RequireAuth';
 
-describe('App', () => {
-  it('should render app', () => {
+describe('RequireAuth', () => {
+  it('should render RequireAuth', () => {
     render(
       <Provider store={store}>
         <Router>
-          <App />
+          <RequireAuth />
         </Router>
       </Provider>
     );
 
-    expect(screen.getByText('Welcome to Extract Data')).toBeInTheDocument();
+    expect(screen).toMatchSnapshot();
   });
 });

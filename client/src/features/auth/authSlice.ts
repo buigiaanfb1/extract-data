@@ -2,12 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { User } from '../../app/services/auth';
-import type { RootState } from '../../app/store';
+import type { Builder, RootState } from '../../app/store';
 
 type AuthState = {
   data: User | null;
   token: string | null;
 };
+
+export const buildAuthReducerState: Builder<AuthState> = (overrides = {}) => ({
+  data: null,
+  token: null,
+});
 
 const slice = createSlice({
   name: 'auth',
