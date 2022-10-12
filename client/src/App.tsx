@@ -1,27 +1,25 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import './App.css';
-import Header from 'components/Header';
+import { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import NotFound from 'components/NotFound';
 import Introduction from 'components/Introduction';
 import { RouteMapping } from 'constant';
-import classes from './styles.module.scss';
 import Authenticate from 'components/Authenticate';
-import { getToken } from 'utils/getSetToken';
 import Dashboard from 'components/Dashboard';
 import { RequireAuth } from 'layouts/RequireAuth/RequireAuth';
 import { useAuth } from 'hooks/useAuth';
 import History from 'components/History';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import './App.css';
+import classes from './styles.module.scss';
 
 function App() {
   const checkAuth = useAuth();
 
   useEffect(() => {
     checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

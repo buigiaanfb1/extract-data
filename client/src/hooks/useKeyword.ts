@@ -1,11 +1,12 @@
 import { useGetAllKeywordsMutation } from 'app/services/keyword';
 import { setKeywords, setLoading } from 'features/keyword/keywordSlice';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { selectCurrentUser } from '../features/auth/authSlice';
 
 export const useKeywords = () => {
   const user = useSelector(selectCurrentUser);
-  const [getAllKeywords, { isLoading }] = useGetAllKeywordsMutation();
+  const [getAllKeywords] = useGetAllKeywordsMutation();
   const dispatch = useDispatch();
 
   const getKeywords = async () => {

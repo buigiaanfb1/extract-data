@@ -49,6 +49,12 @@
     ]
   },
   "devDependencies": {
-    "@types/papaparse": "^5.3.5"
-  }
+    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-react": "^7.18.6",
+    "@types/papaparse": "^5.3.5",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1",
+    "react-test-renderer": "^18.2.0"
+  },
+  "proxy": "http://127.0.0.1:8080"
 }

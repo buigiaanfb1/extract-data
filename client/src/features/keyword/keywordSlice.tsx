@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+
 import type { Keyword } from '../../app/services/keyword';
 import type { RootState } from '../../app/store';
 

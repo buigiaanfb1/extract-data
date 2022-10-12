@@ -10,6 +10,7 @@ import { useKeywords } from 'hooks/useKeyword';
 import useModal from 'hooks/useModal';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import classes from './styles.module.scss';
 
 const KeywordsTable: React.FC = () => {
@@ -17,12 +18,13 @@ const KeywordsTable: React.FC = () => {
   const getAllKeywords = useKeywords();
   const { isShowing, toggle } = useModal();
   const keywords = useSelector(selectKeywords);
-  const [search, { isLoading }] = useSearchMutation();
+  const [search] = useSearchMutation();
 
   const [rawHTML, setRawHTML] = useState<string | null>(null);
 
   useEffect(() => {
     getAllKeywords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSetRawHTML = (content: string | null) => {
@@ -71,7 +73,11 @@ const KeywordsTable: React.FC = () => {
             </tbody>
           </table>
         ) : (
-          <p>Loading...</p>
+          <p>
+            {keywords.data.length === 0
+              ? 'No results at all! Please upload and crawl some keyword'
+              : 'Loading...'}
+          </p>
         )}
       </div>
       <Modal isShowing={isShowing} hide={toggle} content={rawHTML} />

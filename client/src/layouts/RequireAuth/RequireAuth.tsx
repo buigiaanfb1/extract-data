@@ -1,5 +1,4 @@
 import { selectCurrentUser } from 'features/auth/authSlice';
-import { useAuth } from 'hooks/useAuth';
 import { useSelector } from 'react-redux';
 import {
   NavLink,
@@ -9,6 +8,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import { removeToken } from 'utils/getSetToken';
+
 import classes from './styles.module.scss';
 
 export function RequireAuth() {

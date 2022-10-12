@@ -1,17 +1,15 @@
-import {
-  useCrawlMutation,
-  useGetAllKeywordsMutation,
-} from 'app/services/keyword';
+import { useCrawlMutation } from 'app/services/keyword';
 import { setLoading } from 'features/keyword/keywordSlice';
 import { useKeywords } from 'hooks/useKeyword';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import classes from './styles.module.scss';
 import { toast } from 'react-toastify';
+
+import classes from './styles.module.scss';
 
 const Upload: React.FC = () => {
   const dispatch = useDispatch();
-  const [crawl, { isLoading: crawlIsLoading }] = useCrawlMutation();
+  const [crawl] = useCrawlMutation();
   const getAllKeywords = useKeywords();
 
   const [file, setFile] = useState<any>(null);
