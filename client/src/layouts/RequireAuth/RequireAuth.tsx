@@ -50,12 +50,10 @@ export function RequireAuth() {
             </li>
             <li>
               <NavLink
-                to="history"
-                className={({ isActive }) =>
-                  isActive ? activeClassName : undefined
-                }
+                to="guidelines"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
-                History
+                Guidelines
               </NavLink>
             </li>
           </ul>
