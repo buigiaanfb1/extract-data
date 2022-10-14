@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({
   hide,
   content,
 }: ModalProps) =>
-  isShowing
+  isShowing && content
     ? ReactDOM.createPortal(
         <React.Fragment>
           <div
@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({
             tabIndex={-1}
             role="dialog"
           >
-            <code>{content}</code>
+            <div dangerouslySetInnerHTML={{ __html: content }}></div>
           </div>
         </React.Fragment>,
         document.body
