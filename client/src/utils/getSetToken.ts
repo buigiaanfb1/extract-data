@@ -11,5 +11,5 @@ export function setToken(userToken: string) {
 }
 
 export function removeToken(keyName: string) {
-  localStorage.removeItem('access_token');
+  localStorage.removeItem(keyName);
 }

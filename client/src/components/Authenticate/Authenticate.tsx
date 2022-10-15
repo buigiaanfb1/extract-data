@@ -7,10 +7,11 @@ import { toast } from 'react-toastify';
 import { RouteMapping } from 'constant';
 import Header from 'components/Header';
 import { useLoginMutation, useSignupMutation } from 'app/services/auth';
-import { setCredentials } from 'features/auth/authSlice';
+import { clearCredentials, setCredentials } from 'features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
 import classes from './styles.module.scss';
+import { removeToken } from 'utils/getSetToken';
 
 interface IFormInputs {
   username: string;
@@ -79,6 +80,8 @@ const Authenticate: React.FC<AuthenticateProps> = ({
         const response = await signup(data).unwrap();
         if (response.statusCode === 200) {
           toast('Created successfully, please login!');
+          removeToken('access_token');
+          dispatch(clearCredentials());
           navigate('/dashboard');
         }
       } catch (err: any) {

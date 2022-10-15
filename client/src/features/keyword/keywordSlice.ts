@@ -33,10 +33,14 @@ const slice = createSlice({
       state.data = data;
       state.isLoading = false;
     },
+    clearKeywords: (state) => {
+      state.data = [];
+      state.isLoading = false;
+    },
   },
 });
 
-export const { setKeywords, setLoading } = slice.actions;
+export const { setKeywords, setLoading, clearKeywords } = slice.actions;
 
 export default slice.reducer;
 
