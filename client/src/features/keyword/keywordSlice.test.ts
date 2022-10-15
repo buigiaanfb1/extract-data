@@ -1,5 +1,6 @@
 import {
   buildKeywordReducerState,
+  clearKeywords,
   setKeywords,
   setLoading,
 } from './keywordSlice';
@@ -22,6 +23,7 @@ describe('test keywordSlice', () => {
         numberOfLinks: '1',
         totalAdWordsAdvertisers: '1',
         rawHTML: 'rawHTML',
+        isCompleted: true,
       },
     ];
     expect(keywordReducer(undefined, setKeywords({ data }))).toEqual({
@@ -29,5 +31,26 @@ describe('test keywordSlice', () => {
       data,
       isLoading: false,
     });
+  });
+
+  it('clearKeywords', () => {
+    const data = [
+      {
+        id: 1,
+        keyword: 'test',
+        totalResultsOfKeyword: 'About 1',
+        numberOfLinks: '1',
+        totalAdWordsAdvertisers: '1',
+        rawHTML: 'rawHTML',
+        isCompleted: true,
+      },
+    ];
+    expect(keywordReducer({ data, isLoading: false }, clearKeywords())).toEqual(
+      {
+        ...initialKeywordState,
+        data: [],
+        isLoading: false,
+      }
+    );
   });
 });

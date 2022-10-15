@@ -1,5 +1,5 @@
-import { selectCurrentUser } from 'features/auth/authSlice';
-import { useSelector } from 'react-redux';
+import { clearCredentials, selectCurrentUser } from 'features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   NavLink,
   Navigate,
@@ -15,6 +15,7 @@ export function RequireAuth() {
   let auth = useSelector(selectCurrentUser);
   let location = useLocation();
   let navigate = useNavigate();
+  const dispatch = useDispatch();
   if (auth && auth.username === null) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
@@ -25,6 +26,7 @@ export function RequireAuth() {
 
   const handleUserLogout = () => {
     removeToken('access_token');
+    dispatch(clearCredentials());
     navigate('/');
   };
 
