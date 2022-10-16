@@ -1,4 +1,3 @@
-const UserAgent = require('user-agents');
 const cron = require('node-schedule');
 const puppeteer = require('puppeteer-extra');
 const { Op } = require('sequelize');
@@ -16,12 +15,9 @@ const Keyword = db.keyword;
 const keywordManager = new KeywordManager();
 
 keywordManager.on('crawl', async (userId, keywords) => {
-  // Get random user-agent
-  const userAgent = new UserAgent();
-
   const browser = await puppeteer.launch({
     headless: false,
-    args: ['--user-agent=' + userAgent + ''],
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
   const page = await browser.newPage();
 
