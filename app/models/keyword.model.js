@@ -15,6 +15,9 @@ module.exports = (sequelize, Sequelize) => {
     rawHTML: {
       type: Sequelize.TEXT,
     },
+    isCompleted: {
+      type: Sequelize.BOOLEAN,
+    },
   });
 
   return Keyword;

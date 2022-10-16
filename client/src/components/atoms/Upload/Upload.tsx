@@ -1,7 +1,7 @@
 import { useCrawlMutation } from 'app/services/keyword';
 import { setLoading } from 'features/keyword/keywordSlice';
 import { useKeywords } from 'hooks/useKeyword';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -13,6 +13,18 @@ const Upload: React.FC = () => {
   const getAllKeywords = useKeywords();
 
   const [file, setFile] = useState<any>(null);
+  const [startInterval, setStartInterval] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!startInterval) return;
+    let interval = setInterval(async () => {
+      getAllKeywords();
+    }, 10000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [startInterval]);
+
   const fileReader = new FileReader();
 
   const handleOnChange = (e: any) => {
@@ -41,6 +53,8 @@ const Upload: React.FC = () => {
     );
     toast('Uploading...');
     await crawl({ keywords }).unwrap();
+    toast('Uploaded');
+    setStartInterval(true);
     dispatch(setLoading());
     getAllKeywords();
     toast('Done!');

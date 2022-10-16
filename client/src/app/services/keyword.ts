@@ -8,6 +8,7 @@ export interface Keyword {
   numberOfLinks: string | null;
   totalAdWordsAdvertisers: string | null;
   rawHTML: string | null;
+  isCompleted: boolean | false;
 }
 
 export interface CrawlRequest {
