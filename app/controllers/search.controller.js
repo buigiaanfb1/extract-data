@@ -16,7 +16,6 @@ const keywordManager = new KeywordManager();
 
 keywordManager.on('crawl', async (userId, keywords) => {
   const browser = await puppeteer.launch({
-    headless: false,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
   const page = await browser.newPage();
