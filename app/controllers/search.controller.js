@@ -66,8 +66,6 @@ keywordManager.on('crawl', async (userId, keywords) => {
     } catch (e) {}
   }
 
-  browser.close();
-
   // Run cron too check if the account have in-complete keyword.
   const task = cron.scheduleJob('*/1 * * * * *', async () => {
     await crawlKeyword(userId);
@@ -89,6 +87,7 @@ async function crawlKeyword(userId) {
           keyWordUnCrawl.push(keyword);
         }
       }
+      if (Boolean(keyWordUnCrawl.length)) return;
       keywordManager.crawl(userId, keyWordUnCrawl);
     }
   });
@@ -103,10 +102,10 @@ exports.searchByEachKeyWords = async (req, res) => {
       .map((keyword) => ({
         keyword: keyword,
         userId: req.userId,
-        totalResultsOfKeyword: 'Error',
+        totalResultsOfKeyword: '',
         numberOfLinks: 0,
         totalAdWordsAdvertisers: 0,
-        rawHTML: 'Error',
+        rawHTML: '',
         isCompleted: false,
       }));
     Keyword.bulkCreate(arrayValidated, { individualHooks: true })
@@ -125,8 +124,8 @@ exports.searchByEachKeyWords = async (req, res) => {
         res.json(error);
       });
   } else {
-    return res.status(500).send({
-      statusCode: 500,
+    return res.status(422).send({
+      statusCode: 422,
       accessToken: null,
       message: 'Keywords must be smaller than 100',
     });
