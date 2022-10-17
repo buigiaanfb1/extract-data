@@ -75,7 +75,6 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password);
   User.findOne({
     where: {
       username,

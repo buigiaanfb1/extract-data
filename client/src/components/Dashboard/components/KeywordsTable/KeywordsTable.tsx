@@ -2,6 +2,7 @@ import { useSearchMutation } from 'app/services/keyword';
 import Modal from 'components/atoms/Modal/Modal';
 import Search from 'components/atoms/Search/Search';
 import {
+  clearKeywords,
   selectKeywords,
   setKeywords,
   setLoading,
@@ -24,6 +25,10 @@ const KeywordsTable: React.FC = () => {
 
   useEffect(() => {
     getAllKeywords();
+
+    return () => {
+      dispatch(clearKeywords());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -57,16 +62,34 @@ const KeywordsTable: React.FC = () => {
             <tbody>
               {keywords &&
                 keywords.data.map((keyword) => (
-                  <tr>
+                  <tr key={keyword.id}>
                     <th scope="row">{keyword.id}</th>
                     <td>{keyword.keyword}</td>
-                    <td>{keyword.totalResultsOfKeyword}</td>
-                    <td>{keyword.numberOfLinks}</td>
-                    <td>{keyword.totalAdWordsAdvertisers}</td>
                     <td>
-                      <button onClick={() => handleSetRawHTML(keyword.rawHTML)}>
-                        Raw HTML
-                      </button>
+                      {keyword.isCompleted
+                        ? keyword.totalResultsOfKeyword
+                        : 'Loading...'}
+                    </td>
+                    <td>
+                      {keyword.isCompleted
+                        ? keyword.numberOfLinks
+                        : 'Loading...'}
+                    </td>
+                    <td>
+                      {keyword.isCompleted
+                        ? keyword.totalAdWordsAdvertisers
+                        : 'Loading...'}
+                    </td>
+                    <td>
+                      {keyword.isCompleted ? (
+                        <button
+                          onClick={() => handleSetRawHTML(keyword.rawHTML)}
+                        >
+                          Raw HTML
+                        </button>
+                      ) : (
+                        'Loading...'
+                      )}
                     </td>
                   </tr>
                 ))}
